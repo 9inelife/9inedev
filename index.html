@@ -2015,16 +2015,16 @@
 	                                    <input class="inner form-control  h-100  email" placeholder="Email" value="" id="email" name="email" type="email">
                                                                            </div>
                                  </div>
-                                 <div class="col-sm-6">
+<!--                                  <div class="col-sm-6">
                                     <div class="outer radius-2 mb-3">
                                        <input  class="inner form-control  h-100  compagny" value="" id="compagny" name="compagny" placeholder="Compagny" type="text">
                                     </div>
-                                 </div>
-                                 <div class="col-sm-6">
+                                 </div> -->
+<!--                                  <div class="col-sm-6">
                                     <div class="outer radius-2 mb-3">
                                        <input  class="inner form-control  h-100  subject" value="" id="subject" name="subject" placeholder="Subject" type="text">
                                     </div>
-                                 </div>
+                                 </div> -->
                                  <div class="col-12">
                                     <div class="outer radius-2 mb-3">
                                        <textarea class="radius-2 inner form-control   resize-n message" name="message" placeholder="Message" id="message"  rows="6"  ></textarea>
@@ -2325,31 +2325,45 @@
       <script src="js/morphext.min.js"></script>
       <script src="js/switcher.js"></script>
       <script src="js/script.js"></script>
-      <script src="https://smtpjs.com/v3/smtp.js">
       </script>
-      <script> 
-      const form = document.querySelector('.contact-form');
-        function sendMsg(e){
-           e.preventDefault();
-         
-               const name = document.querySelector('.name'),
-                email = document.querySelector('.email'),
-                subject = document.querySelector('.subject'),
-                message = document.querySelector('.message');
+      <script src=
+    "https://smtpjs.com/v3/smtp.js">
+  </script>
 
-                Email.send({
-               SecureToken : " 5e4b11f4-efd2-45b3-a6ea-63c2ce60b5cd2",
-              To : 'preshomezi@gamil.com',
-               From : " email.value",
-          Subject : "contact form",
-          Body : " message.value"
-     }).then(
-        message => alert(message)
-           );
-        }
+<script>
+    const form = document.querySelector(".contact-form");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    let name = document.querySelector(".name").value; 
+    let email = document.querySelector(".email").value;
+    let mess = document.querySelector(".message").value;
+  
+    
 
-        form.addEventListener('submit', sendMsg );
-     </script>
+
+    document.querySelector(".contact-form").reset();
+
+    sendEmail(name, email, mess);
+  })
+  function sendEmail(name, email, mess){
+    Email.send({
+        
+      Host: "smtp.elasticemail.com", 
+      Username: "preshomezi@gmail.com",
+      Password: "15D444E3E4A133DA118733B89C2CBD30DD8A",
+      To: "govoshipping@gmail.com",
+      From: "preshomezi@gmail.com",
+      Subject: `${name} Just messaged you from the preshdev contact form`,
+      Body: `Name: ${name} <br> Email: ${email} <br> Message: ${mess}`,
+    }).then((success) => {
+     
+      alert("message sent successfully. Please check the spam folder in your mail.");
+    }).catch((error) => {
+        
+      alert("error sending message");
+    })
+  }
+</script>
 
       <!-- Google analytics -->
       <!-- End google analytics -->
